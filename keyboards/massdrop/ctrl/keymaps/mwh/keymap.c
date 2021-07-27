@@ -49,23 +49,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * │   │   │   │   │   │   │ │   │   │   │   │ │   │   │   │   │ │   │   │   │
      * └───┘   └───┴───┴───┴───┘ └───┴───┴───┴───┘ └───┴───┴───┴───┘ └───┴───┴───┘
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐ ┌───┬───┬───┐
-     * │   │   │   │   │   │   │   │   │   │   │   │   │   │       │ │   │   │   │
+     * │   │   │   │   │   │   │   │   │   │SA-│SA+│HU-│HU+│       │ │   │   │MD+│
      * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤ ├───┼───┼───┤
-     * │     │   │   │   │   │   │   │   │   │   │   │←RM│RM→│RGB_T│ │MUT│   │   │
+     * │     │   │   │   │   │   │   │   │   │   │   │BL-│BL+│BLTOG│ │MUT│   │MD-│
      * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴─────┤ └───┴───┴───┘
      * │      │   │   │   │   │   │   │   │   │   │   │   │        │
      * ├──────┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴────────┤     ┌───┐
-     * │        │   │   │   │   │   │   │   │   │   │   │          │     │VUP│
+     * │        │   │   │   │   │   │   │   │SP-│SP+│   │          │     │VUP│
      * ├────┬───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤ ┌───┼───┼───┐
      * │    │    │    │         PLAY           │    │ L2 │    │    │ │PRV│VDN│NXT│
      * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘ └───┴───┴───┘
      */
     [1] = LAYOUT(
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_RMOD,RGB_MOD, RGB_TOG, KC_MUTE, XXXXXXX, XXXXXXX, \
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_SAD, RGB_SAI, RGB_HUD, RGB_HUI, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MOD, \
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_VAD, RGB_VAI, RGB_TOG, KC_MUTE, XXXXXXX, RGB_RMOD,\
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                            KC_VOLU, \
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_SPD, RGB_SPI, XXXXXXX, XXXXXXX,                            KC_VOLU, \
         XXXXXXX, XXXXXXX, XXXXXXX, KC_MPLY,                                              XXXXXXX, MO(2),   XXXXXXX, XXXXXXX,          KC_MPRV, KC_VOLD, KC_MNXT  \
     ),
     /* 
@@ -94,8 +94,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+void keyboard_post_init_user(void) {
+}
+
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
+    rgb_matrix_disable();
 };
 
 // Runs constantly in the background, in a loop.
